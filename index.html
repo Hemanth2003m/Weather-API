@@ -1,19 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="te">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🌦️ Real-Time Weather App</title>
+  <title>🌦️ ఆకాశవాణి</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="weather-box">
-    <h1>🌦️ Real-Time Weather</h1>
+    <h1>📡 ఆకాశవాణి</h1>
+
+    <!-- Telugu rotating tagline -->
+    <p class="tagline" id="tagline">లోడ్ అవుతోంది...</p>
+
     <input id="city" placeholder="Enter city name" />
     <button onclick="getWeather()">Get Weather</button>
+
+    <!-- Weather and food info will appear here -->
     <div id="weather"></div>
   </div>
+
+  <script>
+    // Tagline rotation
+    const taglines = [
+      "మేఘాలు ఏం మాట్లడుతున్నాయో వినాలంటే... ఆకాశవాణిని ఓపెన్ చేయండి!",
+      "ఈగలకి కూడా తెల్సిన వాతావరణం... నీకు తెలీదా? ఆకాశవాణి చూడు!",
+      "ఈ రోజు వర్షమా? బయటకు వెళ్లేముందు ఆకాశవాణిని అడుగు!",
+      "ఆకాశంలో ఏముంటుందో తెలుసుకోవాలా? మేఘాలతో చిట్‌చాట్ చేయండీ!",
+      "ఒక్క నిమిషం... మేఘాల పంచాంగం చెప్తుంది ఆకాశవాణి!"
+    ];
+
+    let index = 0;
+    const taglineElement = document.getElementById("tagline");
+
+    function rotateTagline() {
+      taglineElement.style.opacity = 0;
+      setTimeout(() => {
+        taglineElement.textContent = taglines[index];
+        taglineElement.style.opacity = 1;
+        index = (index + 1) % taglines.length;
+      }, 300);
+    }
+
+    rotateTagline();
+    setInterval(rotateTagline, 4000);
+  </script>
 
   <script src="script.js"></script>
 </body>
