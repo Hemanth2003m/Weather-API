@@ -20,7 +20,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
-            cd /var/www/html/Weather_API || exit 1
+            cd /var/www/html/Weather-API || exit 1
             git reset --hard
             git pull origin main
             sudo systemctl restart apache2
