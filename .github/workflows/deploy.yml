@@ -13,11 +13,17 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Connect and Deploy via SSH
+      - name: SSH into EC2 and Pull Latest Code
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ubuntu
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
-            bash /home/ubuntu/deploy.sh
+            cd /var/www/html/your-app-directory
+            if [ -d ".git" ]; then
+              git pull origin main
+            else
+              git clone https://github.com/Hemanth2003m/Weather-API.git .
+            fi
+            sudo systemctl restart apache2
